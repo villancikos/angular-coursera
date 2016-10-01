@@ -13,7 +13,7 @@ function LunchCheckController($scope){
 
   $scope.checkLunch = function () {
     $scope.emptyArrays = realCount($scope.dishes);
-    var message = produceMessage($scope.dishes);
+    var message = produceMessage($scope.dishes,$scope.emptyArrays);
     $scope.message = message;
   };
 
@@ -41,10 +41,12 @@ function LunchCheckController($scope){
       $scope.borderColor="#ff0000"//red
       return "Please enter data first";
     }
+    else if (string.length==pointsToTake) {
+    }
     else{
       $scope.borderColor="#2cbe0c"//green
       $scope.textColor="#2cbe0c";
-      if(splittedString.length<=3){
+      if(splittedString.length-pointsToTake<=3){
         return "Enjoy!";
       }
       else{
