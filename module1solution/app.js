@@ -6,7 +6,7 @@ angular.module('LunchCheck', [])
 LunchCheckController.$inject = ['$scope'];
 function LunchCheckController($scope){
   $scope.dishes = "";
-  $scope.message = "Please enter data first";
+  $scope.message = "";
 
   $scope.checkLunch = function () {
     var message = produceMessage($scope.dishes);
@@ -15,20 +15,17 @@ function LunchCheckController($scope){
 
   function produceMessage(string) {
     var splittedString = string.split(",")
-    console.log(splittedString);
-    console.log(splittedString.length);
-
-    if (splittedString.length <= 0) {
+    if(string.length == 0){
       return "Please enter data first";
     }
-    else if (splittedString.length <= 3) {
-      return "Enjoy!";
-    }
-    else {
-      return "Too much!";
+    else{
+      if(splittedString.length<=3){
+        return "Enjoy!";
+      }
+      else{
+        return "Too much!";
+      }
     }
   }
-
-
 }
 })();
