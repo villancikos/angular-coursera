@@ -12,8 +12,8 @@ function LunchCheckController($scope){
   $scope.emptyArrays=0;
 
   $scope.checkLunch = function () {
-    var message = produceMessage($scope.dishes);
-    //$scope.emptyArrays = realCount($scope.dishes);
+    $scope.emptyArrays = realCount($scope.dishes);
+    var message = produceMessage($scope.dishes,$scope.emptyArrays);
     $scope.message = message;
   };
 
@@ -24,16 +24,17 @@ function LunchCheckController($scope){
       console.log("do nothing");
     }
     else{
-      for (var i=0;i<=array.length;i++){
-        if (array[i].length<=1){
+      for (var i=0;i<=array.length-1;i++){
+
+        if (array[i].length==0){
           pointsToTake+=1;
-          console.log("puntos contados"+pointsToTake);
+          console.log("points to take "+pointsToTake);
         }
       }
       return pointsToTake;
     }
   }
-  function produceMessage(string) {
+  function produceMessage(string,pointsToTake) {
     var splittedString = string.split(",")
     if(string.length == 0){
       $scope.textColor="red";
@@ -43,7 +44,7 @@ function LunchCheckController($scope){
     else{
       $scope.borderColor="#2cbe0c"//green
       $scope.textColor="#2cbe0c";
-      if(splittedString.length<=3){
+      if(splittedString.length-pointsToTake<=3){
         return "Enjoy!";
       }
       else{
